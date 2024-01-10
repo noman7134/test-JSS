@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: device-registration-api-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: device-registration-api
+  template:
+    metadata:
+      labels:
+        app: device-registration-api
+    spec:
+      containers:
+      - name: device-registration-api
+        image: iamnoman07/device-registration-api
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: device-registration-api-config

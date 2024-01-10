@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statistics-api-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: statistics-api
+  template:
+    metadata:
+      labels:
+        app: statistics-api
+    spec:
+      containers:
+      - name: statistics-api
+        image: iamnoman07/statistics-api
+        ports:
+        - containerPort: 8080 
+        envFrom:
+        - configMapRef:
+            name: statistics-api-config
